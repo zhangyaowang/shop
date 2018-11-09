@@ -1,0 +1,144 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		{load href="__STATIC__/h-ui/css/H-ui.min.css"}
+		{load href="__STATIC__/h-ui.admin/css/H-ui.admin.css"}
+		{load href="__STATIC__/Hui-iconfont/1.0.8/iconfont.css"}
+		{load href="__STATIC__/h-ui.admin/skin/default/skin.css" id="skin"}
+		{load href="__STATIC__/h-ui.admin/css/style.css"}
+		{load href="__STATIC__/zTree/v3/css/zTreeStyle/zTreeStyle.css"}
+		<script type="text/javascript" src="__STATIC__/jquery/1.9.1/jquery.min.js"></script>
+		<title>产品分类</title>
+		
+	</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 
+		<span class="c-gray en">&gt;</span> 产品管理 
+		<span class="c-gray en">&gt;</span> 产品分类 
+		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+			<i class="Hui-iconfont">&#xe68f;</i>
+		</a>
+	</nav>
+	<table class="table">
+		<tr>
+			
+			<!--左侧分类-->
+			<td width="220" class="va-t">
+				<select name="" class="select">
+					<option value="" class="bb">增加分类(一级分类)</option>
+					{foreach $res as $v}
+						<option value="" class="aa">{$v}</option>
+					{/foreach}
+				</select>
+			</td>
+			<!--编辑按钮-->
+			<td width="50" class="va-t" style="display:none">
+					<input type="hidden" name="">
+					<button class="button" type="button" value="">&nbsp;&nbsp;编辑&nbsp;&nbsp;</button>
+			</td>
+			<!--编辑按钮的点击事件-->
+			<script type="text/javascript">
+					$(".aa").click(function() {	
+						$("td").eq(1).css("display","block");
+						$("input").attr("value",$(this).text());
+						//alert($(this).text())
+					});
+			</script>
+			
+			<script type="text/javascript">
+					$(".bb").click(function() {	
+						$("td").eq(1).css("display","none");
+					});
+			</script>
+			
+			<!--点击编辑按钮-->
+			<script type="text/javascript">
+					$(".button").click(function() {	
+//						alert($('input').val());
+						$("iframe").attr("src","{:url('prolist/edit')}?title="+$('input').val())	
+					});
+			</script>
+			
+			<!--点击事件-->
+			<!--点击分类出右侧分针-->
+			<script type="text/javascript">
+					$(".aa").click(function() {	
+						$("iframe").attr("src","{:url('prolist/procateadd')}?title="+$(this).text())	
+					});
+			</script>
+			<!--一级分类-->
+			<script type="text/javascript">
+					$(".bb").click(function() {	
+						$("iframe").attr("src","{:url('prolist/procateadd')}")	
+					});
+			</script>
+			
+			<!--右侧分针-->
+			<td class="va-t">
+				<iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=390px>
+				</iframe>
+			</td>		
+		</tr>
+	</table>
+
+{load href='__STATIC__/jquery/1.9.1/jquery.min.js'}
+{load href='__STATIC__/layer/2.4/layer.js'}
+{load href='__STATIC__/h-ui/js/H-ui.min.js'}
+{load href='__STATIC__/h-ui.admin/js/H-ui.admin.js'}
+
+{load href='__STATIC__/zTree/v3/js/jquery.ztree.all-3.5.min.js'}
+
+<script type="text/javascript">
+var setting = {
+	view: {
+		dblClickExpand: false,
+		showLine: false,
+		selectedMulti: false
+	},
+	data: {
+		simpleData: {
+			enable:true,
+			idKey: "id",
+			pIdKey: "pId",
+			rootPId: ""
+		}
+	},
+	callback: {
+		beforeClick: function(treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("tree");
+			if (treeNode.isParent) {
+				zTree.expandNode(treeNode);
+				return false;
+			} else {
+				demoIframe.attr("src",treeNode.file + ".html");
+				return true;
+			}
+		}
+	}
+};
+		
+var code;
+		
+function showCode(str) {
+	if (!code) code = $("#code");
+	code.empty();
+	code.append("<li>"+str+"</li>");
+}
+		
+$(document).ready(function(){
+	var t = $("#treeDemo");
+	t = $.fn.zTree.init(t, setting, zNodes);
+	demoIframe = $("#testIframe");
+	//demoIframe.on("load", loadReady);
+	var zTree = $.fn.zTree.getZTreeObj("tree");
+	//zTree.selectNode(zTree.getNodeByParam("id",'11'));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <title>登陆</title>
+
+  <link rel="shortcut icon" href="favicon.ico">
+  {load href="__CSS__/grid.css" /}
+	{load href="__CSS__/jquery.jqzoom.css" /}
+	{load href="__CSS__/style.css" /}
+ 
+  <script src="/static/js/jquery-1.7.2.min.js" ></script>
+  <script src="/static/js/html5.js" ></script>
+  <script src="/static/js/jflow.plus.js"></script>
+  <script src="/static/js/jquery.carouFredSel-5.2.2-packed.js"></script>
+  <script src="/static/js/checkbox.js"></script>
+  <script src="/static/js/radio.js"></script>
+  <script src="/static/js/selectBox.js"></script>
+
+  <script>
+	$(document).ready(function() {
+		$("select").selectBox();
+	});
+  </script>
+
+  <script>
+	$(document).ready(function(){
+		$("#myController").jFlow({
+			controller: ".control", // must be class, use . sign
+			slideWrapper : "#jFlowSlider", // must be id, use # sign
+			slides: "#slider",  // the div where all your sliding divs are nested in
+			selectedWrapper: "jFlowSelected",  // just pure text, no sign
+			width: "984px",  // this is the width for the content-slider
+			height: "480px",  // this is the height for the content-slider
+			duration: 400,  // time in miliseconds to transition one slide
+			prev: ".slidprev", // must be class, use . sign
+			next: ".slidnext", // must be class, use . sign
+			auto: true	
+		});
+	});
+  </script>
+  <script>
+	$(function() {
+	  $('#list_product').carouFredSel({
+		prev: '#prev_c1',
+		next: '#next_c1',
+		auto: false
+	  });
+          $('#list_product2').carouFredSel({
+		prev: '#prev_c2',
+		next: '#next_c2',
+		auto: false
+	  });
+	  $('#list_banners').carouFredSel({
+		prev: '#ban_prev',
+		next: '#ban_next',
+		scroll: 1,
+		auto: false
+	  });
+	  $(window).resize();
+	});
+  </script>
+  <script>
+       $(document).ready(function(){
+	      $("button").click(function(){
+		     $(this).addClass('click')
+	      });             
+       })
+  </script>
+    
+</head>
+<body>
+  {include file="index/menu2"}
+  <div class="clear"></div>
+  
+  <section id="main" class="entire_width">
+    <div class="container_12">      
+       <div id="content">
+		<div class="grid_12">
+			<h1 class="page_title">登陆账户</h1>
+		</div><!-- .grid_12 -->
+		
+		<div class="grid_6 new_customers">
+			<h2>新客户</h2>
+			<p>通过在我们的商店中创建帐户，您可以更快地完成结帐流程，存储多个送货地址，查看和跟踪您帐户中的订单等。</p>
+			<div class="clear"></div>
+			<form action="{:url('index/index')}" method="post">
+				<button class="account">返回首页</button>
+			</form>
+			
+                </div><!-- .grid_6 -->
+		
+		<div class="grid_6">
+			<form class="registed" onsubmit="return false">
+				<h2>登陆账户</h2>
+							
+				<p>如果您有我们的账户,请直接登陆</p>
+							
+				<div class="email">
+					<strong>账户:</strong><sup class="surely">*</sup><br/>
+					<input type="text" name="name" class="" value="" id="name"/><span id="user"></span>
+				</div><!-- .email -->
+							
+				<div class="password">
+					<strong>密码:</strong><sup class="surely">*</sup><br/>
+					<input type="password" name="pass" class="" value="" style="width:255px;height:33px;margin: 5px 0 13px 0;padding: 0 10px;border: 1px solid #ccc;"/>
+					<span id="code">
+						
+					</span>
+					<br /><a class="forgot" href="#">忘记密码了?</a>
+				</div><!-- .password -->
+				
+				<div class="submit">										
+					<input type="submit" value="登陆" id="lesgo"/>
+					<sup class="surely">*</sup><span>必填</span>
+				</div><!-- .submit -->
+			</form><!-- .registed -->
+                </div><!-- .grid_6 -->
+       </div><!-- #content -->
+       
+      <div class="clear"></div>
+    </div><!-- .container_12 -->
+  </section><!-- #main -->
+  
+  <div class="clear"></div>
+    
+  {include file="index/menu1"}
+ 
+</body>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+</html>
+<script type="text/javascript">
+	$('#lesgo').click(function(){
+		var name=$('input[name=name]').val();
+		var pass=$('input[name=pass]').val();
+		$.ajax({
+			type:"post",
+			url:"{:url('index/goyz')}",
+			data:{name:name,pass:pass},
+			success:function(res){
+				if(res == 1){
+					location.href="{:url('index/index')}";
+				}else if(res == 2){
+					$('#code').text('账号或密码错误').attr('style','color:red;');
+				}
+			}
+		});
+	})
+	//账户存在
+		$('#name').focusout(function(){
+			var name=$(this).val();
+			$.ajax({
+				type:"post",
+				url:"{:url('index/find')}",
+				data:{name:name},
+				success:function(res){
+					if(res<1){
+						$('#user').text('账号不存在').attr('style','color:red;');
+					}else{
+						$('#user').text(' ').attr('style','color:green;');
+					}
+				}
+			});
+		});
+</script>

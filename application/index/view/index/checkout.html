@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <title>确认订单</title>
+
+  <link rel="shortcut icon" href="favicon.ico">
+  {load href="__CSS__/grid.css" /}
+	{load href="__CSS__/jquery.jqzoom.css" /}
+	{load href="__CSS__/style.css" /}
+ 
+  <script src="static/js/jquery-1.7.2.min.js" ></script>
+  <script src="static/js/html5.js" ></script>
+  <script src="static/js/jflow.plus.js"></script>
+  <script src="static/js/jquery.carouFredSel-5.2.2-packed.js"></script>
+  <script src="static/js/checkbox.js"></script>
+  <script src="static/js/radio.js"></script>
+  <script src="static/js/selectBox.js"></script>
+
+  <script>
+	$(document).ready(function() {
+		$("select").selectBox();
+	});
+  </script>
+
+  <script>
+	$(document).ready(function(){
+	    $("#myController").jFlow({
+			controller: ".control", // must be class, use . sign
+			slideWrapper : "#jFlowSlider", // must be id, use # sign
+			slides: "#slider",  // the div where all your sliding divs are nested in
+			selectedWrapper: "jFlowSelected",  // just pure text, no sign
+			width: "984px",  // this is the width for the content-slider
+			height: "480px",  // this is the height for the content-slider
+			duration: 400,  // time in miliseconds to transition one slide
+			prev: ".slidprev", // must be class, use . sign
+			next: ".slidnext", // must be class, use . sign
+			auto: true	
+		});
+	});
+  </script>
+  <script>
+	$(function() {
+	  $('#list_product').carouFredSel({
+		prev: '#prev_c1',
+		next: '#next_c1',
+		auto: false
+	  });
+          $('#list_product2').carouFredSel({
+		prev: '#prev_c2',
+		next: '#next_c2',
+		auto: false
+	  });
+	  $('#list_banners').carouFredSel({
+		prev: '#ban_prev',
+		next: '#ban_next',
+		scroll: 1,
+		auto: false
+	  });
+	  $(window).resize();
+	});
+  </script>
+  <script>
+       $(document).ready(function(){
+	      $("button").click(function(){
+		     $(this).addClass('click')
+	      });             
+       })
+  </script>
+  <style type="text/css">
+  	/*.addre{
+  		display: block;
+  		position: relative;
+  	}*/
+  	/*.checkout_list>.address>li{
+  		list-style: none;
+  		width:150px;
+  		height: 80px;
+  		border: 3px solid red;
+  		position: absolute;
+  	}*/
+  	.address{
+  		margin: 15px;
+  		display: inline-block;
+  		width:210px;
+  		height: 100px;
+  		border: 2px solid red;
+  	}
+  	.address_add>a{
+  		text-decoration:none;
+  		margin-left:20px;
+  	}
+  </style>
+</head>
+<body>
+  {include file="index/menu"}
+  
+  <div class="clear"></div>
+  
+  <section id="main" class="entire_width">
+    <div class="container_12">      
+       <div id="content">
+		<div class="grid_12">
+			<h1 class="page_title">立即付款</h1>
+		</div><!-- .grid_12 -->
+		
+		<div class="grid_9" id="checkout_info" style="width:100%">
+		<ul class="checkout_list addre" >	
+			<li class="active">
+					<div class="list_header">选择收货地址<div class="number">1</div></div>
+			</li>
+			<!--收货地址-->
+			<span class="address">1</span>
+			<span class="address">1</span>
+			<span class="address">1</span>
+			<span class="address">1</span>
+			<li class="address_add"><a href="">添加收货地址</a></li>
+		</ul>
+			<ul class="checkout_list">
+				
+				<li class="active">
+					<div class="list_header">确认订单信息<div class="number">2</div></div>
+					<div class="list_body">
+						 <table class="cart_product">
+				      <tr>
+					     <th class="images"></th>
+					     <th class="bg name">商品名称</th>
+					     <th class="edit"> </th>
+					     <th class="bg price">单价</th>
+					     <th class="qty">数量</th>
+					     <th class="bg subtotal">小计</th>
+					     <th class="close"> </th>
+				      </tr>
+				      <tr>
+					     <td class="images"><a href="product_page.html"><img src="/static/images/product_6.png" alt="Product 6"></a></td>
+					     <td class="bg name">Paddywax Fragrance Diffuser Set, Gardenia Tuberose,<br/> Jasmine, 4-Ounces</td>
+					     <td class="edit"><a title="Edit" href="#">Edit</a></td>
+					     <td class="bg price">$75.00</td>
+					     <td class="qty"><input type="text" name="" value="" placeholder="1000" /></td>
+					     <td class="bg subtotal">$750.00</td>
+					     <td class="close"><a title="close" class="close" href="#"></a></td>
+				      </tr>
+				      <tr>
+					     <td class="images"><a href="product_page.html"><img src="/static/images/produkt_slid1.png" alt="Product Slide 1"></a></td>
+					     <td class="bg name">California Scents Spillproof Organic Air Fresheners,<br/> Coronado Cherry, 1.5 Ounce Cannister</td>
+					     <td class="edit"><a title="Edit" href="#">Edit</a></td>
+					     <td class="bg price">$75.00</td>
+					     <td class="qty"><input type="text" name="" value="" placeholder="1000" /></td>
+					     <td class="bg subtotal">$750.00</td>
+					     <td class="close"><a title="close" class="close" href="#"></a></td>
+				      </tr>
+				      <tr>
+					     <td colspan="7" class="cart_but">
+						    <button class="continue"><span>icon</span>继续购物</button>
+						    <button class="update"><span>icon</span>结算</button>
+					     </td>
+				      </tr>
+			       </table>
+						<div class="clear"></div>
+					</div>
+				</li>
+				
+			</ul>
+                </div><!-- .grid_9 -->
+	
+       </div><!-- #content -->
+       
+      <div class="clear"></div>
+    </div><!-- .container_12 -->
+  </section><!-- #main -->
+  
+  <div class="clear"></div>
+   {include file="index/menu1"}
+</body>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+</html>

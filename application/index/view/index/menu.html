@@ -1,0 +1,85 @@
+  <div class="container_12">
+    <div id="top">
+      <div class="grid_3">
+        <div class="phone_top">
+        	{load href="__JS__/selectBox.js" /}
+          Call Us +777 (100) 1234
+        </div><!-- .phone_top -->
+      </div><!-- .grid_3 -->
+
+      <div class="grid_6">
+        <div class="welcome">
+          	{$user}
+        </div><!-- .welcome -->
+      </div><!-- .grid_6 -->
+
+      <div class="grid_3">
+      </div><!-- .grid_3 -->
+    </div><!-- #top -->
+
+    <div class="clear"></div>
+
+    <header id="branding">
+      <div class="grid_3">
+        <hgroup>
+          <h1 id="site_logo" ><a href="index.html" title=""><img src="/static/images/logo.png" alt="Online Store Theme Logo"/></a></h1>
+          <h2 id="site_description">Online Store Theme</h2>
+        </hgroup>
+      </div><!-- .grid_3 -->
+
+      <div class="grid_3">
+        <form class="search" action="{:url('catalog_list')}" style="position:relative;">
+          <input type="text" name="search" class="entry_form" value="" placeholder=""/>
+          <input type="submit" name="" id="" value="搜索" style="padding-left:15px;padding-right:15px;position: absolute;top: 0;left: 225px;"/>
+				</form>
+      </div><!-- .grid_3 -->
+
+      <div class="grid_6">
+        <ul id="cart_nav">
+          <li>
+            <a class="cart_li" href="{:url('index/shopping_cart')}">购物车 <span>$0.00</span></a>
+            <ul class="cart_cont">
+              <li class="no_border"><p>Recently added item(s)</p></li>
+              <li>
+                <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="/static/images/cart_img.png" alt="" title="" /></div></a>
+                <div class="cont_cart">
+                  <h4>Caldrea Linen and Room Spray</h4>
+                  <div class="price">1 x $399.00</div>
+                </div>
+                <a title="close" class="close" href="#"></a>
+                <div class="clear"></div>
+              </li>
+              
+              <li>
+                <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="/static/images/produkt_slid1.png" alt="" title="" /></div></a>
+                <div class="cont_cart">
+                  <h4>Caldrea Linen and Room Spray</h4>
+                  <div class="price">1 x $399.00</div>
+                </div>
+                <a title="close" class="close" href="#"></a>
+                <div class="clear"></div>
+              </li>
+	      <li class="no_border">
+		<a href="{:url('index/shopping_cart')}" class="view_cart">查看购物车</a>
+		<a href="{:url('index/checkout')}" class="checkout">前往结账</a>
+	      </li>
+            </ul>
+          </li>
+        </ul>
+
+        <nav class="private">
+          <ul>
+            <li><a href="{:url('index/center')}">我的账户</a></li>
+		<li class="separator">|</li>
+            <li><a href="#">我的收藏</a></li>
+		<li class="separator">|</li>
+            <li><a href="{:url('index/login')}">登陆</a></li>
+		<li class="separator">|</li>
+            <li><a href="{:url('index/log')}">注册</a></li>
+          </ul>
+        </nav><!-- .private -->
+      </div><!-- .grid_6 -->
+    </header><!-- #branding -->
+  </div><!-- .container_12 -->
+
+  <div class="clear"></div>

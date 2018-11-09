@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="shortcut icon" href="images/favicon.html">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <title>{$title}</title>
+
+  <link rel="shortcut icon" href="favicon.ico">
+  {load href="__CSS__/grid.css" /}
+	{load href="__CSS__/jquery.jqzoom.css" /}
+	{load href="__CSS__/style.css" /}
+ 
+  <script src="/static/js/jquery-1.7.2.min.js" ></script>
+  <script src="/static/js/html5.js" ></script>
+  <script src="/static/js/jflow.plus.js"></script>
+  <script src="/static/js/jquery.carouFredSel-5.2.2-packed.js"></script>
+  <script src="/static/js/checkbox.js"></script>
+  <script src="/static/js/radio.js"></script>
+  <script src="/static/js/selectBox.js"></script>
+
+  <script>
+	$(document).ready(function() {
+		$("select").selectBox();
+	});
+  </script>
+
+  <script>
+	$(document).ready(function(){
+	    $("#myController").jFlow({
+			controller: ".control", // must be class, use . sign
+			slideWrapper : "#jFlowSlider", // must be id, use # sign
+			slides: "#slider",  // the div where all your sliding divs are nested in
+			selectedWrapper: "jFlowSelected",  // just pure text, no sign
+			width: "984px",  // this is the width for the content-slider
+			height: "480px",  // this is the height for the content-slider
+			duration: 400,  // time in miliseconds to transition one slide
+			prev: ".slidprev", // must be class, use . sign
+			next: ".slidnext", // must be class, use . sign
+			auto: true	
+		});
+	});
+  </script>
+  <script>
+	$(function() {
+	  $('#list_product').carouFredSel({
+		prev: '#prev_c1',
+		next: '#next_c1',
+		auto: false
+	  });
+          $('#list_product2').carouFredSel({
+		prev: '#prev_c2',
+		next: '#next_c2',
+		auto: false
+	  });
+	  $(window).resize();
+	});
+  </script>
+  <script>
+       $(document).ready(function(){
+	      $("button").click(function(){
+		     $(this).addClass('click')
+	      });             
+       })
+  </script>
+  <style type="text/css">
+  	.addborder{
+  		border: 1px solid red;
+  		width:226px;
+  		height:378px;
+  	}
+  	.options .grid-list a.grid span, .options .grid-list a{
+  		text-decoration: none;
+  		color: red;
+  	}
+  	.options .grid-list a.grid span, .options .grid-list a b{
+	  	margin: 21.5px 0 0 15px;
+	    display: block;
+  	}
+  	#asc,#desc{
+  		width:59px;
+  		height:30px;
+  		background: #fff;
+  		border: 1px solid #ccc;
+  		color:red;
+  		font-weight: bold;
+  	}
+  	#sell,#price_price,#com{
+  		height: 59px;
+    	width: 59px;
+    	border-right: 1px solid #e0e0e0;
+    	background: transparent;
+    	color:red;
+    	float: left;
+    	font-weight:bold;
+    	font-size: 13px;
+  	}
+  </style>
+  <script type="text/javascript">
+  	$(function(){
+  		function jz(){
+  			//设置商品边框移入移出
+	  		$('.shop_bor').css({'margin':'5px 0px','width':'226px','height':'348px','border':'1px solid #fff'});
+	  		$('.shop_bor').mouseover(function(){
+	  			$(this).css({'width':'226px','height':'348px','border':'1px solid red'})
+	  		});
+	  		$('.shop_bor').mouseout(function(){
+	  			$(this).css({'width':'226px','height':'348px','border':'1px solid #fff'})
+	  		});
+	  		//设置商品名移入移出
+	  		$('.shop_bor p a').css({'text-decoration':'none','color':'#333'});
+	  		$('.shop_bor p a').mouseover(function(){
+	  			$(this).css({'color':'red','text-decoration':'underline'});
+	  		});
+	  		$('.shop_bor p a').mouseout(function(){
+	  			$(this).css({'text-decoration':'none','color':'#333'});
+	  		});
+	  	}
+//		调用事件
+  		jz();
+  		//综合
+  		$('#com').click(function(){
+  			price='';
+  			pricego(price);
+  		});
+  		//销量
+  		$('#sell').click(function(){
+  			price='sell desc';
+  			pricego(price);
+  		});
+  		//价格低到高
+  		$('#asc').click(function(){
+  			price='price asc';
+  			pricego(price);
+  		});
+  		//价格高到低
+  		$('#desc').click(function(){
+  			price='price desc';
+  			pricego(price);
+  		});
+			//价格函数
+  		function pricego(price){
+  			$.ajax({
+					url:"{:url('index/catalog_list')}",
+	  			type:'post',
+	  			//传参
+	  			data:{price:price},
+	  			//成功返回值
+	  			success:function(res){
+	  				//遍历
+	  				for(var key in res){
+	  					var str="";
+		  				$.each(res[key], function(k,v) {
+									str+="<div class=\"grid_3 shop_bor\">";
+									str+="<div class=\"prev\">";
+									str+="<a href=\"{:url('index/product_page')}\">";
+									str+="<img src=\"/uploads/"+v.picname+"\" />";
+									str+="</a>";
+									str+="</div>";
+									str+="<div>";
+									str+="<div>";
+									str+="<p style=\"width: 210px;margin: 5px auto;\">";
+									str+="<span style=\"color: red;display:inline-block;width: 80px;margin-left: 0px;\">";
+									str+="<b style=\"font-size: 15px;\">¥ "+v.price+"</b>";
+									str+="</span>";
+									str+="<span style=\"font-size: 10px;display:inline-block;width: 110px;margin-right: 0px;text-align: right;\">";
+									str+="已卖出"+v.sell+"件商品";
+									str+="</span></p>";
+									str+="<p style=\"width: 210px;margin: 5px auto;\">";
+									str+="<a href=\"{:url('index/product_page')}\">"+v.shopname+"</a>";
+									str+="</p>";
+									str+="<p style=\"margin-right:20px;text-align: right;\">产地:"+v.address+"</p>";
+									str+="</div>";
+									str+="</div>";
+									str+="</div>";
+		  				});
+		  				$('#pro').html(str);
+		  				jz();
+	  				}
+	  			}
+	  		})
+  		};
+  	})
+  </script>
+ </head>
+<body>
+  {include file="index/menu"}
+  <div class="clear"></div>
+  <hr style="width: 80%;margin-left: 10%;border: 2px solid orangered;" />
+  <section id="main">
+    <div class="container_12">
+       <div id="content" class="grid_9">
+	      <h1 class="page_title">所有分类</h1>
+	      
+	      <div class="options">
+		     <div class="grid-list">
+			   <!--<a class="grid" href="catalog_grid.html"><span>img</span></a>-->
+				   <!--<a class="list curent" href="{:url('index/catalog_list')}?search={$title}"><b>综合</b></a>
+				   <a class="grid" href="{:url('index/catalog_list')}?search={$title}&sell=sell desc"><b>销量</b></a>-->
+				   <input type="submit" name="" class="sell grid" id="com" value="综合" />
+				   <input type="submit" name="" class="sell grid" id="sell" value="销量" />
+				   <!--<input type="submit" name="" class="sell grid" id='price_price' value="价格" disable/>-->
+				   <input type="submit" name="" id="asc" value="价格↑" />
+				   <input type="submit" name="" id="desc" value="价格↓" />
+		     </div><!-- .grid-list -->
+		     
+		     
+		     <div class="sort">
+			   {$page}
+			    <select>
+				   <option>Position</option>
+				   <option>Price</option>
+				   <option>Rating</option>
+				   <option>Name</option>
+			    </select>
+			    <a class="sort_up" href="#">&#8593;</a>
+			    <!--<ul class="sort_up">
+						<li><a href="?page=1">&laquo;</a></li>
+						<li class="disabled"><span>&raquo;</span></li>
+					</ul-->
+		     </div><!-- .sort -->
+	      </div><!-- .options -->
+	      
+	      <div class="listing_product">
+			<div class="product_li" >
+				<div id="pro">
+				<!--商品-->
+				{foreach $arr as $v}
+					<div class="grid_3 shop_bor" >
+						<div class="prev">
+							<a href="{:url('index/product_page')}?id={$v.id}"><img src="/uploads/{$v.picname}" alt="" title="" /></a>
+						</div><!-- .prev -->
+						<div class="">
+							<!--价格-->
+							<div id="">
+								<p style="width: 210px;margin: 5px auto;">
+									<span id="" style="color: red;display:inline-block;width: 80px;margin-left: 0px;">
+										<b style="font-size: 15px;">¥ {$v.price}</b>
+									</span>
+									<span id="" style="font-size: 10px;display:inline-block;width: 110px;margin-right: 0px;text-align: right;">
+										已卖出{$v.sell}件商品
+									</span>
+								</p>
+								<p style="width: 210px;margin: 5px auto;">
+									<a href="{:url('index/product_page')}">{$v.shopname}</a>
+								</p>
+								<p id="" style="margin-right:20px;text-align: right;">产地:{$v.address}</p>
+							</div>
+						</div>
+					</div><!-- .grid_3 -->
+				{/foreach}
+				</div>
+				<div class="clear"></div>
+			</div><!-- .article -->
+			<!--
+				
+			-->
+	    
+	      <div class="clear"></div>
+	      </div><!-- .listing_product -->
+	      
+	      <div class="clear"></div>
+	      
+	      <div class="pagination">
+	      	<!--跳转页-->
+	      	{$arr->render()}
+	      </div><!-- .pagination -->
+	      </div><!-- #content -->
+       
+      <div class="clear"></div>
+      
+    </div><!-- .container_12 -->
+  </section><!-- #main -->
+  
+  <div class="clear"></div>
+  {include file="index/menu1"}
+</body>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+</html>
